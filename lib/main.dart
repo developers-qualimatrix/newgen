@@ -317,6 +317,7 @@ Page resource error:
         }
       } else {
         debugPrint("Failed to fetch URL: ${response.statusCode}");
+        debugPrint("Error fetching URL: ${response.body}");
         setState(() {
           _isLoading = false;
           _isLoggedIn = false;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_view/screens/tnc.dart';
 
 class LoginPage extends StatefulWidget {
   final Function(
@@ -90,23 +91,30 @@ class _LoginPageState extends State<LoginPage> {
               // const SizedBox(height: 32),
               _buildLoginButton(),
               const SizedBox(height: 24),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     Text("Don't have an account? ",
-              //         style: TextStyle(color: Colors.grey[600])),
-              //     GestureDetector(
-              //       onTap: () {},
-              //       child: const Text(
-              //         'Sign up',
-              //         style: TextStyle(
-              //           color: Colors.amber,
-              //           fontWeight: FontWeight.w600,
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("For Privacy Policy ",
+                      style: TextStyle(color: Colors.grey[600])),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const TermsAndConditionsPage()), // Navigate to TncScreen
+                      );
+                    },
+                    child: const Text(
+                      'Click Here',
+                      style: TextStyle(
+                        color: Colors.amber,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
