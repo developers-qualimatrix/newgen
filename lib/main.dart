@@ -146,7 +146,7 @@ class _WebViewExampleState extends State<WebViewExample> {
     String? mobile = prefs.getString('mobile');
 
     if (referenceAuthId != null && mobile != null) {
-      await fetchUrlAndLoadWebView(referenceAuthId, mobile);
+      await fetchUrlAndLoadWebView(mobile);
     } else {
       setState(() {
         _isLoading = false;
@@ -237,9 +237,9 @@ Page resource error:
   }
 
   fetchUrlAndLoadWebView(
-    String referenceAuthId,
     String mobile,
   ) async {
+    String referenceAuthId = mobile;
     if (referenceAuthId.isEmpty || mobile.isEmpty) {
       return showDialog<String>(
         context: context,

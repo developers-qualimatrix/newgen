@@ -3,8 +3,7 @@ import 'package:web_view/screens/tnc.dart';
 
 class LoginPage extends StatefulWidget {
   final Function(
-    String,
-    String,
+    String
   ) onSubmit;
   final bool loader;
 
@@ -18,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   bool isChecked = false;
   // final TextEditingController _correlationIdController =
   //     TextEditingController();
-  final TextEditingController _referenceIdController = TextEditingController();
+  // final TextEditingController _referenceIdController = TextEditingController();
   final TextEditingController _mobileController = TextEditingController();
   // final TextEditingController _usernameController = TextEditingController();
   // final TextEditingController _passwordController = TextEditingController();
@@ -33,63 +32,75 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 40),
-              const Text(
-                'Welcome Back',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+              const SizedBox(height: 20),
+              Center(
+                child: Image.asset('assets/images/logo.png'),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 20),
+                    const Text(
+                      'Welcome',
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Log in to continue accessing your account.',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    // _buildInputLabel('Your Correlation id'),
+                    // _buildTextField(_correlationIdController, 'Enter correlation id'),
+                    // const SizedBox(height: 20),
+                    // _buildInputLabel('Refference Id'),
+                    // _buildTextField(
+                    //   _referenceIdController,
+                    //   'Enter Refference Id',
+                    // ),
+                    const SizedBox(height: 20),
+                    _buildInputLabel('Mobile Number'),
+                    _buildTextField(_mobileController, 'Enter mobile number'),
+                    // const SizedBox(height: 20),
+                    // _buildInputLabel('Username'),
+                    // _buildTextField(_usernameController, 'Enter username'),
+                    // const SizedBox(height: 20),
+                    // _buildInputLabel('Password'),
+                    // _buildTextField(_passwordController, 'Enter password'),
+                    const SizedBox(height: 20),
+                    // Row(
+                    //   children: [
+                    //     Checkbox(
+                    //       value: isChecked,
+                    //       onChanged: (value) {
+                    //         setState(() {
+                    //           isChecked = value!;
+                    //         });
+                    //       },
+                    //       shape: RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.circular(4),
+                    //       ),
+                    //     ),
+                    //     const Text(
+                    //       'Keep me logged in.',
+                    //       style: TextStyle(fontSize: 16, color: Colors.black87),
+                    //     ),
+                    //   ],
+                    // ),
+                    // const SizedBox(height: 32),
+                    _buildLoginButton(),
+                  ],
                 ),
               ),
-              const SizedBox(height: 8),
-              Text(
-                'Log in to continue accessing your account.',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey[600],
-                ),
-              ),
-              const SizedBox(height: 40),
-              // _buildInputLabel('Your Correlation id'),
-              // _buildTextField(_correlationIdController, 'Enter correlation id'),
-              // const SizedBox(height: 20),
-              _buildInputLabel('Refference Id'),
-              _buildTextField(
-                _referenceIdController,
-                'Enter Refference Id',
-              ),
-              const SizedBox(height: 20),
-              _buildInputLabel('Mobile Number'),
-              _buildTextField(_mobileController, 'Enter mobile number'),
-              // const SizedBox(height: 20),
-              // _buildInputLabel('Username'),
-              // _buildTextField(_usernameController, 'Enter username'),
-              // const SizedBox(height: 20),
-              // _buildInputLabel('Password'),
-              // _buildTextField(_passwordController, 'Enter password'),
-              const SizedBox(height: 20),
-              // Row(
-              //   children: [
-              //     Checkbox(
-              //       value: isChecked,
-              //       onChanged: (value) {
-              //         setState(() {
-              //           isChecked = value!;
-              //         });
-              //       },
-              //       shape: RoundedRectangleBorder(
-              //         borderRadius: BorderRadius.circular(4),
-              //       ),
-              //     ),
-              //     const Text(
-              //       'Keep me logged in.',
-              //       style: TextStyle(fontSize: 16, color: Colors.black87),
-              //     ),
-              //   ],
-              // ),
-              // const SizedBox(height: 32),
-              _buildLoginButton(),
               const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -115,6 +126,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ],
               ),
+              Center(
+                child: Image.asset('assets/images/privacy.png'),
+              )
             ],
           ),
         ),
@@ -166,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
       height: 56,
       child: ElevatedButton(
         onPressed: () {
-          widget.onSubmit(_referenceIdController.text, _mobileController.text);
+          widget.onSubmit(_mobileController.text);
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.amber,
