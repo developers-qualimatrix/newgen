@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:web_view/screens/login.dart';
+import 'package:web_view/screens/website_view.dart';
 import 'package:web_view/utils/helpers.dart';
 import 'package:web_view/widgets/restart.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -27,7 +28,7 @@ void main() {
 
 Future<void> loadEnvAndRunApp() async {
   await dotenv.load(fileName: ".env");
-  runApp(const RestartWidget(child: MaterialApp(home: WebViewExample())));
+  runApp(const RestartWidget(child: MaterialApp(home: InsuranzeePosScreen())));
 }
 
 const String kNavigationExamplePage = '''
