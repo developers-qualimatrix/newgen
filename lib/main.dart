@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
@@ -7,7 +8,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:web_view/screens/login.dart';
+import 'package:web_view/screens/permissions.dart';
 import 'package:web_view/screens/website_view.dart';
 import 'package:web_view/utils/helpers.dart';
 import 'package:web_view/widgets/restart.dart';
@@ -21,14 +24,41 @@ import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 // #enddocregion platform_imports
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  loadEnvAndRunApp();
+  final cameraStatus = await Permission.camera.status;
+
+  final String initialRoute =
+      (cameraStatus.isGranted) ? '/webview' : '/permissions';
+  loadEnvAndRunApp(initialRoute);
 }
 
-Future<void> loadEnvAndRunApp() async {
+Future<void> loadEnvAndRunApp(String initialRoute) async {
   await dotenv.load(fileName: ".env");
-  runApp(const RestartWidget(child: MaterialApp(home: InsuranzeePosScreen())));
+  //runApp(const RestartWidget(child: MaterialApp(home: InsuranzeePosScreen())));
+  runApp(MyApp(initialRoute: initialRoute));
+}
+
+class MyApp extends StatelessWidget {
+  final String initialRoute;
+  const MyApp({super.key, required this.initialRoute});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      title: 'Insuranzee POS',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.orange,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      initialRoute: initialRoute,
+      getPages: [
+        GetPage(name: '/permissions', page: () => const PermissionsScreen()),
+        GetPage(name: '/webview', page: () => const InsuranzeePosScreen()),
+      ],
+    );
+  }
 }
 
 const String kNavigationExamplePage = '''
